@@ -11,47 +11,47 @@
 @implementation FKFuture
 
 @synthesize then    = _then;
-@synthesize success = _success;
+@synthesize perform = _perform;
 @synthesize failure = _failure;
 
 +(FKFuture *)future {
   return [[[self alloc] init] autorelease];
 }
 
-+(FKFuture *)futureWithSuccessBlock:(FKFutureSuccessBlock)success {
-  return [[[self alloc] initWithSuccessBlock:success] autorelease];
++(FKFuture *)futureWithPerformBlock:(FKFuturePerformBlock)perform {
+  return [[[self alloc] initWithPerformBlock:perform] autorelease];
 }
 
 +(FKFuture *)futureWithFailureBlock:(FKFutureFailureBlock)failure {
   return [[[self alloc] initWithFailureBlock:failure] autorelease];
 }
 
-+(FKFuture *)futureWithSuccessBlock:(FKFutureSuccessBlock)success failureBlock:(FKFutureFailureBlock)failure {
-  return [[[self alloc] initWithSuccessBlock:success failureBlock:failure] autorelease];
++(FKFuture *)futureWithPerformBlock:(FKFuturePerformBlock)perform failureBlock:(FKFutureFailureBlock)failure {
+  return [[[self alloc] initWithPerformBlock:perform failureBlock:failure] autorelease];
 }
 
 -(void)dealloc {
   [_then release];
-  [_success release];
+  [_perform release];
   [_failure release];
   [super dealloc];
 }
 
 -(id)init {
-  return [self initWithSuccessBlock:nil failureBlock:nil];
+  return [self initWithPerformBlock:nil failureBlock:nil];
 }
 
--(id)initWithSuccessBlock:(FKFutureSuccessBlock)success {
-  return [self initWithSuccessBlock:success failureBlock:nil];
+-(id)initWithPerformBlock:(FKFuturePerformBlock)perform {
+  return [self initWithPerformBlock:perform failureBlock:nil];
 }
 
 -(id)initWithFailureBlock:(FKFutureFailureBlock)failure {
-  return [self initWithSuccessBlock:nil failureBlock:failure];
+  return [self initWithPerformBlock:nil failureBlock:failure];
 }
 
--(id)initWithSuccessBlock:(FKFutureSuccessBlock)success failureBlock:(FKFutureFailureBlock)failure {
+-(id)initWithPerformBlock:(FKFuturePerformBlock)perform failureBlock:(FKFutureFailureBlock)failure {
   if((self = [super init]) != nil){
-    _success = [success copy];
+    _perform = [perform copy];
     _failure = [failure copy];
   }
   return self;
@@ -62,11 +62,14 @@
 }
 
 -(void)resolve:(id)object {
-  if(self.success){
-    FKFuture *chain;
-    if((chain = self.success(object)) != nil){
-      chain.then = self.then;
-      self.then = chain;
+  if(self.perform){
+    id result;
+    if((result = self.perform(object)) != nil){
+      if([result isKindOfClass:[FKFuture class]]){
+        ((FKFuture *)result).then = self.then; self.then = (FKFuture *)result;
+      }else if([result isKindOfClass:[NSError class]]){
+        [self error:(NSError *)result];
+      }
     }
   }else if(self.then){
     [self.then resolve:object];
@@ -78,20 +81,20 @@
   else if(self.then) [self.then error:error];
 }
 
--(FKFuture *)then:(FKFutureSuccessBlock)success, ... {
+-(FKFuture *)then:(FKFuturePerformBlock)perform, ... {
   FKFuture *current = nil;
-  if(success){
+  if(perform){
     va_list ap;
-    va_start(ap, success);
+    va_start(ap, perform);
     FKFuture *next;
     
-    next = [FKFuture futureWithSuccessBlock:success];
+    next = [FKFuture futureWithPerformBlock:perform];
     self.then = next;
     current = next;
     
-    FKFutureSuccessBlock block;
-    while((block = va_arg(ap, FKFutureSuccessBlock)) != NULL){
-      next = [FKFuture futureWithSuccessBlock:block];
+    FKFuturePerformBlock block;
+    while((block = va_arg(ap, FKFuturePerformBlock)) != NULL){
+      next = [FKFuture futureWithPerformBlock:block];
       current.then = next;
       current = next;
     }
@@ -104,10 +107,10 @@
 -(NSString *)description {
   
   NSString *this;
-  if(self.success && self.failure){
-    this = [NSString stringWithFormat:@"<FKFuture (success=%@, failure=%@)>", self.success, self.failure];
-  }else if(self.success){
-    this = [NSString stringWithFormat:@"<FKFuture (success=%@)>", self.success];
+  if(self.perform && self.failure){
+    this = [NSString stringWithFormat:@"<FKFuture (perform=%@, failure=%@)>", self.perform, self.failure];
+  }else if(self.perform){
+    this = [NSString stringWithFormat:@"<FKFuture (perform=%@)>", self.perform];
   }else if(self.failure){
     this = [NSString stringWithFormat:@"<FKFuture (failure=%@)>", self.failure];
   }else{
