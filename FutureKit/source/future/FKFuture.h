@@ -8,34 +8,38 @@
 
 @class FKFuture;
 
-typedef id    (^FKFuturePerformBlock)(id object);
+typedef id    (^FKFutureSuccessBlock)(id object);
 typedef void  (^FKFutureFailureBlock)(NSError *error);
 
 @interface FKFuture : NSObject
 
 +(FKFuture *)future;
-+(FKFuture *)futureWithPerformBlock:(FKFuturePerformBlock)perform;
++(FKFuture *)futureWithSuccessBlock:(FKFutureSuccessBlock)success;
 +(FKFuture *)futureWithFailureBlock:(FKFutureFailureBlock)failure;
-+(FKFuture *)futureWithPerformBlock:(FKFuturePerformBlock)perform failureBlock:(FKFutureFailureBlock)failure;
++(FKFuture *)futureWithSuccessBlock:(FKFutureSuccessBlock)success failureBlock:(FKFutureFailureBlock)failure;
 
--(id)initWithPerformBlock:(FKFuturePerformBlock)perform;
+-(id)initWithSuccessBlock:(FKFutureSuccessBlock)success;
 -(id)initWithFailureBlock:(FKFutureFailureBlock)failure;
--(id)initWithPerformBlock:(FKFuturePerformBlock)perform failureBlock:(FKFutureFailureBlock)failure;
+-(id)initWithSuccessBlock:(FKFutureSuccessBlock)success failureBlock:(FKFutureFailureBlock)failure;
 
 -(void)resolve;
 -(void)resolve:(id)object;
+
+-(void)error;
 -(void)error:(NSError *)error;
 
--(FKFuture *)then:(FKFuturePerformBlock)perform, ... NS_REQUIRES_NIL_TERMINATION;
+-(FKFuture *)then:(FKFutureSuccessBlock)success, ... NS_REQUIRES_NIL_TERMINATION;
+-(FKFuture *)then:(FKFutureSuccessBlock)success arguments:(va_list)arguments;
 
 @property (readwrite, retain) FKFuture            * then;
-@property (readwrite, copy)   FKFuturePerformBlock  perform;
+@property (readwrite, copy)   FKFutureSuccessBlock  success;
 @property (readwrite, copy)   FKFutureFailureBlock  failure;
+@property (readonly, getter=isResolved) BOOL        resolved;
 
 @end
 
-static inline FKFuture * FKPerform(FKFuturePerformBlock block) {
-  return [FKFuture futureWithPerformBlock:block];
+static inline FKFuture * FKSuccess(FKFutureSuccessBlock block) {
+  return [FKFuture futureWithSuccessBlock:block];
 }
 
 static inline FKFuture * FKFailure(FKFutureFailureBlock block) {
