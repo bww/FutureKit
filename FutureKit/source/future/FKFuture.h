@@ -26,7 +26,7 @@ typedef void  (^FKFutureFailureBlock)(NSError *error);
 -(void)resolve:(id)object;
 -(void)error:(NSError *)error;
 
--(FKFuture *)then:(FKFuturePerformBlock)perform, ...;
+-(FKFuture *)then:(FKFuturePerformBlock)perform, ... NS_REQUIRES_NIL_TERMINATION;
 
 @property (readwrite, retain) FKFuture            * then;
 @property (readwrite, copy)   FKFuturePerformBlock  perform;
