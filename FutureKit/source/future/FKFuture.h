@@ -6,25 +6,12 @@
 // Developed in New York City
 // 
 
-typedef void (^FKFutureSuccessBlock)(void);
-typedef void (^FKFutureFailureBlock)(NSError *error);
-typedef void (^FKFutureResolveBlock)(NSError *error);
-typedef void (^FKFuturePerformBlock)(FKFutureResolveBlock block);
+@class FKFuture;
 
-typedef enum {
-  kFKFuturePerformStateNotStarted = 0,
-  kFKFuturePerformStateWorking,
-  kFKFuturePerformStateSuccess,
-  kFKFuturePerformStateFailure,
-  kFKFuturePerformStateResolved
-} FKFuturePerformState;
+typedef FKFuture * (^FKFutureSuccessBlock)(id object);
+typedef void       (^FKFutureFailureBlock)(NSError *error);
 
-@interface FKFuture : NSObject {
-@private
-  dispatch_semaphore_t  _semaphore;
-  FKFuturePerformState  _performState;
-  NSError             * _performError;
-}
+@interface FKFuture : NSObject
 
 +(FKFuture *)future;
 +(FKFuture *)futureWithSuccessBlock:(FKFutureSuccessBlock)success;
@@ -36,12 +23,14 @@ typedef enum {
 -(id)initWithSuccessBlock:(FKFutureSuccessBlock)success failureBlock:(FKFutureFailureBlock)failure;
 
 -(void)resolve;
+-(void)resolve:(id)object;
 -(void)error:(NSError *)error;
+
+-(FKFuture *)then:(FKFutureSuccessBlock)success, ...;
 
 @property (readwrite, retain) FKFuture            * then;
 @property (readwrite, copy)   FKFutureSuccessBlock  success;
 @property (readwrite, copy)   FKFutureFailureBlock  failure;
-@property (readwrite, copy)   FKFuturePerformBlock  perform;
 
 @end
 
