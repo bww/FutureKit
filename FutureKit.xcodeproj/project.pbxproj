@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		D39D23A117822A2300213D63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39D23A017822A2300213D63 /* Foundation.framework */; };
-		D39D23A717822A2300213D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D39D23A517822A2300213D63 /* InfoPlist.strings */; };
 		D39D23B017822A2400213D63 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39D23AF17822A2400213D63 /* SenTestingKit.framework */; };
 		D39D23B217822A2400213D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39D23B117822A2400213D63 /* UIKit.framework */; };
 		D39D23B317822A2400213D63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39D23A017822A2300213D63 /* Foundation.framework */; };
 		D39D23B817822A2400213D63 /* FutureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39D239D17822A2300213D63 /* FutureKit.framework */; };
-		D39D23BE17822A2400213D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D39D23BC17822A2400213D63 /* InfoPlist.strings */; };
-		D39D23C117822A2400213D63 /* FutureKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D23C017822A2400213D63 /* FutureKitTests.m */; };
+		D39D23CF17822AAB00213D63 /* FutureKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D23CE17822AAB00213D63 /* FutureKitTests.m */; };
+		D39D23EA1782360500213D63 /* FKFuture.h in Headers */ = {isa = PBXBuildFile; fileRef = D39D23E81782360500213D63 /* FKFuture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D39D23EB1782360500213D63 /* FKFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D23E91782360500213D63 /* FKFuture.m */; };
+		D39D23ED1782369300213D63 /* FutureKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D39D23EC1782369300213D63 /* FutureKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,16 +38,18 @@
 /* Begin PBXFileReference section */
 		D39D239D17822A2300213D63 /* FutureKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = FutureKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39D23A017822A2300213D63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D39D23A417822A2300213D63 /* FutureKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FutureKit-Info.plist"; sourceTree = "<group>"; };
-		D39D23A617822A2300213D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D39D23A817822A2300213D63 /* FutureKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FutureKit-Prefix.pch"; sourceTree = "<group>"; };
+		D39D23A417822A2300213D63 /* FutureKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FutureKit-Info.plist"; path = "resources/FutureKit-Info.plist"; sourceTree = "<group>"; };
+		D39D23A817822A2300213D63 /* FutureKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FutureKit-Prefix.pch"; path = "source/FutureKit-Prefix.pch"; sourceTree = "<group>"; };
 		D39D23AE17822A2400213D63 /* FutureKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FutureKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39D23AF17822A2400213D63 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D39D23B117822A2400213D63 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		D39D23BB17822A2400213D63 /* FutureKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FutureKitTests-Info.plist"; sourceTree = "<group>"; };
-		D39D23BD17822A2400213D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D39D23BF17822A2400213D63 /* FutureKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FutureKitTests.h; sourceTree = "<group>"; };
-		D39D23C017822A2400213D63 /* FutureKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FutureKitTests.m; sourceTree = "<group>"; };
+		D39D23BB17822A2400213D63 /* FutureKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FutureKitTests-Info.plist"; path = "resources/FutureKitTests-Info.plist"; sourceTree = "<group>"; };
+		D39D23CD17822AAB00213D63 /* FutureKitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureKitTests.h; sourceTree = "<group>"; };
+		D39D23CE17822AAB00213D63 /* FutureKitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureKitTests.m; sourceTree = "<group>"; };
+		D39D23E317822AEB00213D63 /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = project.xcconfig; path = ../../project.xcconfig; sourceTree = "<group>"; };
+		D39D23E81782360500213D63 /* FKFuture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FKFuture.h; sourceTree = "<group>"; };
+		D39D23E91782360500213D63 /* FKFuture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FKFuture.m; sourceTree = "<group>"; };
+		D39D23EC1782369300213D63 /* FutureKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,7 @@
 				D39D23B917822A2400213D63 /* FutureKitTests */,
 				D39D239F17822A2300213D63 /* Frameworks */,
 				D39D239E17822A2300213D63 /* Products */,
+				D39D23E317822AEB00213D63 /* project.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +108,7 @@
 		D39D23A217822A2300213D63 /* FutureKit */ = {
 			isa = PBXGroup;
 			children = (
+				D39D23CA17822A7B00213D63 /* Source */,
 				D39D23A317822A2300213D63 /* Supporting Files */,
 			);
 			path = FutureKit;
@@ -113,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				D39D23A417822A2300213D63 /* FutureKit-Info.plist */,
-				D39D23A517822A2300213D63 /* InfoPlist.strings */,
 				D39D23A817822A2300213D63 /* FutureKit-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -122,8 +126,7 @@
 		D39D23B917822A2400213D63 /* FutureKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				D39D23BF17822A2400213D63 /* FutureKitTests.h */,
-				D39D23C017822A2400213D63 /* FutureKitTests.m */,
+				D39D23CB17822AA400213D63 /* Source */,
 				D39D23BA17822A2400213D63 /* Supporting Files */,
 			);
 			path = FutureKitTests;
@@ -133,9 +136,45 @@
 			isa = PBXGroup;
 			children = (
 				D39D23BB17822A2400213D63 /* FutureKitTests-Info.plist */,
-				D39D23BC17822A2400213D63 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D39D23CA17822A7B00213D63 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D39D23E71782360500213D63 /* future */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D39D23CB17822AA400213D63 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D39D23CC17822AAB00213D63 /* future */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D39D23CC17822AAB00213D63 /* future */ = {
+			isa = PBXGroup;
+			children = (
+				D39D23CD17822AAB00213D63 /* FutureKitTests.h */,
+				D39D23CE17822AAB00213D63 /* FutureKitTests.m */,
+			);
+			name = future;
+			path = source/future;
+			sourceTree = "<group>";
+		};
+		D39D23E71782360500213D63 /* future */ = {
+			isa = PBXGroup;
+			children = (
+				D39D23E81782360500213D63 /* FKFuture.h */,
+				D39D23E91782360500213D63 /* FKFuture.m */,
+				D39D23EC1782369300213D63 /* FutureKit.h */,
+			);
+			name = future;
+			path = source/future;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +184,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39D23EA1782360500213D63 /* FKFuture.h in Headers */,
+				D39D23ED1782369300213D63 /* FutureKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,13 +196,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D39D23C417822A2400213D63 /* Build configuration list for PBXNativeTarget "FutureKit" */;
 			buildPhases = (
-				D39D239517822A2300213D63 /* ShellScript */,
 				D39D239617822A2300213D63 /* Sources */,
 				D39D239717822A2300213D63 /* Frameworks */,
 				D39D239817822A2300213D63 /* Headers */,
 				D39D239917822A2300213D63 /* Resources */,
-				D39D239A17822A2300213D63 /* ShellScript */,
-				D39D239B17822A2300213D63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -224,7 +262,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39D23A717822A2300213D63 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,52 +269,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39D23BE17822A2400213D63 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D39D239517822A2300213D63 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n  ([[ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]] || \\\n    ([[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n     [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n     [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n    )\n  )\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n\nif [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nfi\n";
-		};
-		D39D239A17822A2300213D63 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "HEADERS_ROOT=$SRCROOT/$PRODUCT_NAME\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Versions/$FRAMEWORK_VERSION/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$(find $FRAMEWORK_HEADERS_DIR/. -not -type d 2> /dev/null | sed -e \"s@.*/@@g\")\n\nFIND_OPTS=\"\"\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n  if [ -n \"$FIND_OPTS\" ]; then\n    FIND_OPTS=\"$FIND_OPTS -o\"\n  fi\n  FIND_OPTS=\"$FIND_OPTS -name '$PUBLIC_HEADER'\"\ndone\n\nif [ -n \"$FIND_OPTS\" ]; then\n  for ORIG_HEADER in $(eval \"find $HEADERS_ROOT/. $FIND_OPTS\" 2> /dev/null | sed -e \"s@^$HEADERS_ROOT/./@@g\"); do\n    PUBLIC_HEADER=$(basename $ORIG_HEADER)\n    RELATIVE_PATH=$(dirname $ORIG_HEADER)\n    if [ -e $FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER ]; then\n      mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n      mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\n    fi\n  done\nfi\n";
-		};
-		D39D239B17822A2300213D63 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]\nthen\n    echo \"ONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM}: Skipping other platform build\"\nelse\n    # Make sure the other platform gets built\n    \n    echo \"Build other platform\"\n    \n    echo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    \n    \n    # Build the fat static library binary\n    \n    echo \"Create universal static library\"\n    \n    echo \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \n    echo mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nfi\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]\nthen\n    # Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n    \n    echo \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n    \n    echo rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    echo cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nfi\n";
-		};
 		D39D23AC17822A2400213D63 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39D23EB1782360500213D63 /* FKFuture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39D23C117822A2400213D63 /* FutureKitTests.m in Sources */,
+				D39D23CF17822AAB00213D63 /* FutureKitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,28 +322,10 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		D39D23A517822A2300213D63 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D39D23A617822A2300213D63 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D39D23BC17822A2400213D63 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D39D23BD17822A2400213D63 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		D39D23C217822A2400213D63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D39D23E317822AEB00213D63 /* project.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -369,12 +349,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
 		D39D23C317822A2400213D63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D39D23E317822AEB00213D63 /* project.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -390,7 +370,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -398,16 +377,12 @@
 		D39D23C517822A2400213D63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FutureKit/FutureKit-Prefix.pch";
-				INFOPLIST_FILE = "FutureKit/FutureKit-Info.plist";
+				GCC_PREFIX_HEADER = "FutureKit/source/FutureKit-Prefix.pch";
+				INFOPLIST_FILE = "FutureKit/resources/FutureKit-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
@@ -417,16 +392,12 @@
 		D39D23C617822A2400213D63 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FutureKit/FutureKit-Prefix.pch";
-				INFOPLIST_FILE = "FutureKit/FutureKit-Info.plist";
+				GCC_PREFIX_HEADER = "FutureKit/source/FutureKit-Prefix.pch";
+				INFOPLIST_FILE = "FutureKit/resources/FutureKit-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
@@ -441,8 +412,8 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FutureKit/FutureKit-Prefix.pch";
-				INFOPLIST_FILE = "FutureKitTests/FutureKitTests-Info.plist";
+				GCC_PREFIX_HEADER = "FutureKit/source/FutureKit-Prefix.pch";
+				INFOPLIST_FILE = "FutureKitTests/resources/FutureKitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -456,8 +427,8 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FutureKit/FutureKit-Prefix.pch";
-				INFOPLIST_FILE = "FutureKitTests/FutureKitTests-Info.plist";
+				GCC_PREFIX_HEADER = "FutureKit/source/FutureKit-Prefix.pch";
+				INFOPLIST_FILE = "FutureKitTests/resources/FutureKitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -482,6 +453,7 @@
 				D39D23C617822A2400213D63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D39D23C717822A2400213D63 /* Build configuration list for PBXNativeTarget "FutureKitTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +462,7 @@
 				D39D23C917822A2400213D63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

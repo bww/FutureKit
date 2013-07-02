@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'FutureKit' target in the 'FutureKit' project
-//
-
-#ifdef __OBJC__
-  #import <Foundation/Foundation.h>
-#endif
