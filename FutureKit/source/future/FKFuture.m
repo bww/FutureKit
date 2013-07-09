@@ -70,10 +70,27 @@
  * Resolve this future. This method should be invoked when the long-running operation
  * represented by this future has completed successfully.
  * 
+ * The future is resolved at the beginning of the next iteration of the run loop. This method
+ * is intended to function essentially as does autorelease by providing enough time to pass
+ * the future to another object before it is resolved.
+ * 
  * @param object The result of the operation. This is the object provided to the success
  * handler block as a paramter.
  */
 -(void)resolve:(id)object {
+  [[NSRunLoop currentRunLoop] performSelector:@selector(__resolve:) target:self argument:object order:NSUIntegerMax modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+}
+
+/**
+ * @internal
+ * 
+ * Resolve this future immediately. Unlike -resolve:, this method does not wait until
+ * the next run loop iteration to resolve the future.
+ * 
+ * @param object The result of the operation. This is the object provided to the success
+ * handler block as a paramter.
+ */
+-(void)__resolve:(id)object {
   id result = nil;
   
   // invoke the success handler if we have one and handle the result. the handler may return
@@ -187,8 +204,8 @@
 /**
  * Obtain the last future in this chain, which may be this future itself.
  */
--(FKFuture *)last {
-  return (self.then) ? self.then.last : self;
+-(FKFuture *)finally {
+  return (self.then) ? [self.then finally] : self;
 }
 
 /**
