@@ -10,7 +10,7 @@
 
 @implementation FKFuture
 
-@synthesize then    = _then;
+@synthesize then = _then;
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize resolved = _resolved;
@@ -58,10 +58,21 @@
   return self;
 }
 
+/**
+ * Resolve this future. This method should be invoked when the long-running operation
+ * represented by this future has completed successfully.
+ */
 -(void)resolve {
   [self resolve:nil];
 }
 
+/**
+ * Resolve this future. This method should be invoked when the long-running operation
+ * represented by this future has completed successfully.
+ * 
+ * @param object The result of the operation. This is the object provided to the success
+ * handler block as a paramter.
+ */
 -(void)resolve:(id)object {
   id result = nil;
   
@@ -88,10 +99,19 @@
   
 }
 
+/**
+ * Resolve this future with an error.
+ */
 -(void)error {
   [self error:nil];
 }
 
+/**
+ * Resolve this future with an error.
+ * 
+ * @param error The error produced by the operation. This is the object provided to the
+ * failure handler block as a paramter.
+ */
 -(void)error:(NSError *)error {
   
   // handle the error either via the failure block, or by forwarding it to the next future in the chain.
@@ -106,6 +126,10 @@
   
 }
 
+/**
+ * Set a number of futures in a chain, each with a success handler block, as the
+ * next future after the receiver.
+ */
 -(FKFuture *)then:(FKFutureSuccessBlock)success, ... {
   FKFuture *current = nil;
   if(success){
@@ -117,6 +141,10 @@
   return current;
 }
 
+/**
+ * Set a number of futures in a chain, each with a success handler block, as the
+ * next future after the receiver.
+ */
 -(FKFuture *)then:(FKFutureSuccessBlock)success arguments:(va_list)arguments {
   FKFuture *current = nil;
   FKFuture *next;
@@ -135,6 +163,16 @@
   return current;
 }
 
+/**
+ * Obtain the last future in this chain, which may be this future itself.
+ */
+-(FKFuture *)last {
+  return (self.then) ? self.then.last : self;
+}
+
+/**
+ * Determine if this entire chain of futures is resolved.
+ */
 -(BOOL)isResolved {
   BOOL resolved;
   @synchronized(self){ resolved = _resolved; }
@@ -142,6 +180,9 @@
   else return FALSE;
 }
 
+/**
+ * Obtain a string description
+ */
 -(NSString *)description {
   
   NSString *this;

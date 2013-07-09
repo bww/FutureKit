@@ -32,6 +32,7 @@ typedef void  (^FKFutureFailureBlock)(NSError *error);
 -(FKFuture *)then:(FKFutureSuccessBlock)success arguments:(va_list)arguments;
 
 @property (readwrite, retain) FKFuture            * then;
+@property (readonly)          FKFuture            * last;
 @property (readwrite, copy)   FKFutureSuccessBlock  success;
 @property (readwrite, copy)   FKFutureFailureBlock  failure;
 @property (readonly, getter=isResolved) BOOL        resolved;
