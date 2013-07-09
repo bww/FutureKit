@@ -209,6 +209,19 @@
 }
 
 /**
+ * Set the last future in this chain. Setting this property like so:
+ * 
+ *    future.finally = another;
+ * 
+ * has the same effect as the following, but expressed more clearly:
+ * 
+ *    future.finally.then = another;
+ */
+-(void)setFinally:(FKFuture *)future {
+  self.finally.then = future;
+}
+
+/**
  * Determine if this entire chain of futures is resolved.
  */
 -(BOOL)isResolved {
