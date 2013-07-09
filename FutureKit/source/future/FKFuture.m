@@ -109,10 +109,27 @@
 /**
  * Resolve this future with an error.
  * 
+ * The future is resolved with an error at the beginning of the next iteration of the run loop.
+ * This method is intended to function essentially as does autorelease by providing enough time
+ * to pass the future to another object before it is resolved.
+ * 
  * @param error The error produced by the operation. This is the object provided to the
  * failure handler block as a paramter.
  */
 -(void)error:(NSError *)error {
+  [[NSRunLoop currentRunLoop] performSelector:@selector(__error:) target:self argument:error order:NSUIntegerMax modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+}
+
+/**
+ * @internal
+ * 
+ * Resolve this future with an error immediately. Unlike -error:, this method does not wait until
+ * the next run loop iteration to resolve the future.
+ * 
+ * @param error The error produced by the operation. This is the object provided to the
+ * failure handler block as a paramter.
+ */
+-(void)__error:(NSError *)error {
   
   // handle the error either via the failure block, or by forwarding it to the next future in the chain.
   if(self.failure){
@@ -129,6 +146,8 @@
 /**
  * Set a number of futures in a chain, each with a success handler block, as the
  * next future after the receiver.
+ * 
+ * @return the receiver
  */
 -(FKFuture *)then:(FKFutureSuccessBlock)success, ... {
   FKFuture *current = nil;
@@ -144,6 +163,8 @@
 /**
  * Set a number of futures in a chain, each with a success handler block, as the
  * next future after the receiver.
+ * 
+ * @return the receiver
  */
 -(FKFuture *)then:(FKFutureSuccessBlock)success arguments:(va_list)arguments {
   FKFuture *current = nil;
@@ -160,7 +181,7 @@
     current = next;
   }
   
-  return current;
+  return self;
 }
 
 /**
