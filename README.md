@@ -3,12 +3,12 @@ Future Kit is an Objective-C implementation of *Futures* (or *Promises*, if you 
 
 A future is a placeholder object representing a long-running, asynchronous operation that will complete (or fail) at some point in the future. When the operation a future represents completes the future is *resolved*, and its success handler block is executed. If the operation fails, the future's failure handler block is executed.
 
-If a future resolves successfully, the success handler block has the option to return another future. In this way a sequence of asynchronous operations can be linked together in a chain making them easier to understand and handle.
+If a future resolves successfully, the success handler block has the option to return another future. In this way a sequence of asynchronous operations can be linked together in a chain making them easier to understand and work with.
 
 # Producing Futures
-A method which performs a long-running, asynchronous operation can return a future representing that operation in place of parameter success and failure handler blocks.
+A method which performs a long-running, asynchronous operation can return a future representing that operation (e.g., instead of parameter success and failure handler blocks). The caller can then register handler blocks with the future and chain the future together with other operations.
 
-When the operation completes, this method must resolve the future. Or, if the operation fails, it must propagate an error.
+When the operation completes, the method producing a future must resolve the future it returned. Or, if the operation fails, it must similarly propagate an error.
 
 	-(FKFuture *)downloadContentsOfURL:(NSURL *)url {
 		FKFuture *future = [FKFuture future];
@@ -27,7 +27,7 @@ When the operation completes, this method must resolve the future. Or, if the op
 	}
 
 # Using Futures
-The code invoking the long-running operation can then use the future to handle it once it completes or fails. Using futures, it's trivial to perform a number of such operations in a sequence:
+The code calling the long-running method can then use the future it returns to do something once the operation completes or fails. Using futures, it's trivial to perform a number of such operations in a sequence:
 
 	MyDownloader *downloader; // assume this exists
 	FKFuture *future = [downloader downloadContentsOfURL:theFirstURL];
@@ -66,13 +66,15 @@ Resolving futures and propagating errors in this way allows you to do very usefu
 	-(FKFuture *)someLongRunningMethod:(id)object {
 		FKFuture * future = [FKFuture future];
 		
-		if(object == nil) [future error:/* an error */];
-		
-		/* ... do something useful here */
+		if(object == nil){
+			[future error:/* an error */];
+		}else{
+			/* ... do something useful here */
+		}
 		
 		return future;
 	}
 
 In the example above, if the error were propagated immediately when `-error:` is invoked, it would be done *before* the future is returned to the caller, which would make it impossible for the caller to handle an error of this sort.
 
-By waiting until the next iteration of the run loop the caller has an opportunity to register an error handler block with the returned future before the error is actualy propagated and everything works as you would expect.
+By waiting until the next iteration of the run loop the caller has an opportunity to register an error handler block with the returned future before the error is actualy propagated – and everything works the way you would expect.
