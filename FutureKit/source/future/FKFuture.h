@@ -36,14 +36,11 @@ typedef void  (^FKFutureFailureBlock)(NSError *error);
 -(id)initWithFailureBlock:(FKFutureFailureBlock)failure;
 -(id)initWithSuccessBlock:(FKFutureSuccessBlock)success failureBlock:(FKFutureFailureBlock)failure;
 
--(void)resolve;
--(void)resolve:(id)object;
+-(FKFuture *)resolve;
+-(FKFuture *)resolve:(id)object;
 
--(void)error;
--(void)error:(NSError *)error;
-
--(FKFuture *)then:(FKFutureSuccessBlock)success, ... NS_REQUIRES_NIL_TERMINATION;
--(FKFuture *)then:(FKFutureSuccessBlock)success arguments:(va_list)arguments;
+-(FKFuture *)error;
+-(FKFuture *)error:(NSError *)error;
 
 @property (readwrite, retain) FKFuture            * then;
 @property (readwrite, retain) FKFuture            * finally;

@@ -75,9 +75,11 @@
 /**
  * Resolve this future. This method should be invoked when the long-running operation
  * represented by this future has completed successfully.
+ * 
+ * @return the receiver
  */
--(void)resolve {
-  [self resolve:nil];
+-(FKFuture *)resolve {
+  return [self resolve:nil];
 }
 
 /**
@@ -90,9 +92,11 @@
  * 
  * @param object The result of the operation. This is the object provided to the success
  * handler block as a paramter.
+ * @return the receiver
  */
--(void)resolve:(id)object {
+-(FKFuture *)resolve:(id)object {
   [[NSRunLoop currentRunLoop] performSelector:@selector(__resolve:) target:self argument:object order:NSUIntegerMax modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+  return self;
 }
 
 /**
@@ -131,10 +135,12 @@
 }
 
 /**
- * Resolve this future with an error.
+ * Resolve this future with an unspecified error.
+ * 
+ * @return the receiver
  */
--(void)error {
-  [self error:nil];
+-(FKFuture *)error {
+  return [self error:nil];
 }
 
 /**
@@ -146,9 +152,11 @@
  * 
  * @param error The error produced by the operation. This is the object provided to the
  * failure handler block as a paramter.
+ * @return the receiver
  */
--(void)error:(NSError *)error {
+-(FKFuture *)error:(NSError *)error {
   [[NSRunLoop currentRunLoop] performSelector:@selector(__error:) target:self argument:error order:NSUIntegerMax modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+  return self;
 }
 
 /**
@@ -172,47 +180,6 @@
   // mark this future as being resolved
   @synchronized(self){ _resolved = TRUE; }
   
-}
-
-/**
- * Set a number of futures in a chain, each with a success handler block, as the
- * next future after the receiver.
- * 
- * @return the receiver
- */
--(FKFuture *)then:(FKFutureSuccessBlock)success, ... {
-  FKFuture *current = nil;
-  if(success){
-    va_list ap;
-    va_start(ap, success);
-    current = [self then:success arguments:ap];
-    va_end(ap);
-  }
-  return current;
-}
-
-/**
- * Set a number of futures in a chain, each with a success handler block, as the
- * next future after the receiver.
- * 
- * @return the receiver
- */
--(FKFuture *)then:(FKFutureSuccessBlock)success arguments:(va_list)arguments {
-  FKFuture *current = nil;
-  FKFuture *next;
-  
-  next = [FKFuture futureWithSuccessBlock:success];
-  self.then = next;
-  current = next;
-  
-  FKFutureSuccessBlock block;
-  while((block = va_arg(arguments, FKFutureSuccessBlock)) != NULL){
-    next = [FKFuture futureWithSuccessBlock:block];
-    current.then = next;
-    current = next;
-  }
-  
-  return self;
 }
 
 /**
