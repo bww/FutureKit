@@ -130,7 +130,7 @@
   }
   
   // mark this future as being resolved
-  @synchronized(self){ _resolved = TRUE; }
+  self.resolved = TRUE;
   
 }
 
@@ -177,8 +177,8 @@
     [self.then error:error];
   }
   
-  // mark this future as being resolved
-  @synchronized(self){ _resolved = TRUE; }
+  // mark this future and all futures remaining in this chain as resolved
+  [self setResolvedForward:TRUE];
   
 }
 
@@ -210,6 +210,21 @@
   @synchronized(self){ resolved = _resolved; }
   if(resolved) return (self.then) ? [self.then isResolved] : TRUE;
   else return FALSE;
+}
+
+/**
+ * Specify whether this future is resolved
+ */
+-(void)setResolved:(BOOL)resolved {
+  @synchronized(self){ _resolved = resolved; }
+}
+
+/**
+ * Mark this future and any forward futures in its chain as resolved
+ */
+-(void)setResolvedForward:(BOOL)resolved {
+  self.resolved = resolved;
+  if(self.then) [self.then setResolvedForward:resolved];
 }
 
 /**
