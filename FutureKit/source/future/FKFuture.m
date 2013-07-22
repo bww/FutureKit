@@ -22,9 +22,13 @@
 
 #import "FKFuture.h"
 
+@interface FKFuture (/* Private */)
+@property (readwrite, retain) FKFuture * next;
+@end
+
 @implementation FKFuture
 
-@synthesize then = _then;
+@synthesize next = _next;
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize resolved = _resolved;
@@ -46,7 +50,7 @@
 }
 
 -(void)dealloc {
-  [_then release];
+  [_next release];
   [_success release];
   [_failure release];
   [super dealloc];
@@ -116,17 +120,17 @@
   if(self.success){
     if((result = self.success(object)) != nil){
       if([result isKindOfClass:[FKFuture class]]){
-        ((FKFuture *)result).then = self.then; self.then = (FKFuture *)result;
+        ((FKFuture *)result).next = self.next; self.next = (FKFuture *)result;
       }else if([result isKindOfClass:[NSError class]]){
         [self error:(NSError *)result];
       }
     }
   }
   
-  // if the handler did not produce a result of some sort and we have a then future, just
+  // if the handler did not produce a result of some sort and we have a next future, just
   // forward the result to the next future in the chain. it may have more work to do
-  if(result == nil && self.then){
-    [self.then resolve:object];
+  if(result == nil && self.next){
+    [self.next resolve:object];
   }
   
   // mark this future as being resolved
@@ -173,8 +177,8 @@
   // handle the error either via the failure block, or by forwarding it to the next future in the chain.
   if(self.failure){
     self.failure(error);
-  }else if(self.then){
-    [self.then error:error];
+  }else if(self.next){
+    [self.next error:error];
   }
   
   // mark this future and all futures remaining in this chain as resolved
@@ -183,23 +187,27 @@
 }
 
 /**
- * Obtain the last future in this chain, which may be this future itself.
+ * Obtain the last future in this chain, which may be this future itself. This is <em>not</em> the
+ * next future in the chain immediately following the receiver.
  */
--(FKFuture *)finally {
-  return (self.then) ? [self.then finally] : self;
+-(FKFuture *)then {
+  return (self.next) ? [self.next then] : self;
 }
 
 /**
  * Set the last future in this chain. Setting this property like so:
  * 
- *    future.finally = another;
+ *    future.then = another;
  * 
  * has the same effect as the following, but expressed more clearly:
  * 
- *    future.finally.then = another;
+ *    future.then.next = another;
+ * 
+ * This property is used to link futures into a chain by adding a future to the end. Futures
+ * are always added to the end of a chain.
  */
--(void)setFinally:(FKFuture *)future {
-  self.finally.then = future;
+-(void)setThen:(FKFuture *)future {
+  self.then.next = future;
 }
 
 /**
@@ -208,7 +216,7 @@
 -(BOOL)isResolved {
   BOOL resolved;
   @synchronized(self){ resolved = _resolved; }
-  if(resolved) return (self.then) ? [self.then isResolved] : TRUE;
+  if(resolved) return (self.next) ? [self.next isResolved] : TRUE;
   else return FALSE;
 }
 
@@ -224,7 +232,7 @@
  */
 -(void)setResolvedForward:(BOOL)resolved {
   self.resolved = resolved;
-  if(self.then) [self.then setResolvedForward:resolved];
+  if(self.next) [self.next setResolvedForward:resolved];
 }
 
 /**
@@ -243,8 +251,8 @@
     this = @"<FKFuture>";
   }
   
-  if(self.then){
-    return [NSString stringWithFormat:@"%@ then %@", this, self.then];
+  if(self.next){
+    return [NSString stringWithFormat:@"%@ then %@", this, self.next];
   }else{
     return [NSString stringWithFormat:@"%@", this];
   }

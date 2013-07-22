@@ -33,25 +33,25 @@ The code calling the long-running method can then use the future it returns to d
 	FKFuture *future = [downloader downloadContentsOfURL:theFirstURL];
 	
 	// download the second URL when the first completes
-	future.finally = FKSuccess(^ id (NSData *data) {
+	future.then = FKSuccess(^ id (NSData *data) {
 		// do somethign with the data…
 		[downloader downloadContentsOfURL:theSecondURL];
 	});
 	
 	// download the third URL when the second completes
-	future.finally = FKSuccess(^ id (NSData *data) {
+	future.then = FKSuccess(^ id (NSData *data) {
 		// do somethign with the data…
 		[downloader downloadContentsOfURL:theThirdURL];
 	});
 	
 	// handle the data from the third URL and end the chain
-	future.finally = FKSuccess(^ id (NSData *data) {
+	future.then = FKSuccess(^ id (NSData *data) {
 		// do somethign with the data…
 		return nil; // ok, we're done
 	});
 	
 	// the error handler will be invoked if any of the preceding operations fail
-	future.finally = FKFailure(^ void (NSError *error) {
+	future.then = FKFailure(^ void (NSError *error) {
 		NSLog(@"Oh no! %@", [error localizedDescription];
 		// note that errors are not recoverable in Future Kit
 	});

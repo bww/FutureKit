@@ -43,7 +43,6 @@ typedef void  (^FKFutureFailureBlock)(NSError *error);
 -(FKFuture *)error:(NSError *)error;
 
 @property (readwrite, retain) FKFuture            * then;
-@property (readwrite, retain) FKFuture            * finally;
 @property (readwrite, copy)   FKFutureSuccessBlock  success;
 @property (readwrite, copy)   FKFutureFailureBlock  failure;
 @property (readonly, getter=isResolved) BOOL        resolved;
