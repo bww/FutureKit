@@ -130,7 +130,7 @@
   // if the handler did not produce a result of some sort and we have a next future, just
   // forward the result to the next future in the chain. it may have more work to do
   if(result == nil && self.next){
-    [self.next resolve:object];
+    [self.next __resolve:object];
   }
   
   // mark this future as being resolved
@@ -178,7 +178,7 @@
   if(self.failure){
     self.failure(error);
   }else if(self.next){
-    [self.next error:error];
+    [self.next __error:error];
   }
   
   // mark this future and all futures remaining in this chain as resolved
