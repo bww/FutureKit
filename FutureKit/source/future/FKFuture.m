@@ -115,6 +115,10 @@
 -(void)__resolve:(id)object {
   id result = nil;
   
+  // if this future is already resolved, we do nothing. this can occur when a future has been
+  // resolved and a caller sends a second resolve message, which is incorrect.
+  if(self.resolved) return;
+  
   // invoke the success handler if we have one and handle the result. the handler may return
   // another future, in which case we link it into the chain, or an error, in which case we bail
   if(self.success){
@@ -173,6 +177,10 @@
  * failure handler block as a paramter.
  */
 -(void)__error:(NSError *)error {
+  
+  // if this future is already resolved, we do nothing. this can occur when a future has been
+  // resolved and a caller sends a second resolve message, which is incorrect.
+  if(self.resolved) return;
   
   // handle the error either via the failure block, or by forwarding it to the next future in the chain.
   if(self.failure){
