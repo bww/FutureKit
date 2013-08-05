@@ -32,6 +32,7 @@
 @synthesize success = _success;
 @synthesize failure = _failure;
 @synthesize resolved = _resolved;
+@synthesize forwardAfterError = _forwardAfterError;
 
 +(FKFuture *)future {
   return [[[self alloc] init] autorelease];
@@ -185,7 +186,11 @@
   // handle the error either via the failure block, or by forwarding it to the next future in the chain.
   if(self.failure){
     self.failure(error);
-  }else if(self.next){
+  }
+  
+  // if the error wasn'thandled by this future, or if we are explicitly forwarding after handling the error,
+  // forward to the next future in the chain.
+  if((self.failure == nil || self.forwardAfterError) && self.next){
     [self.next __error:error];
   }
   

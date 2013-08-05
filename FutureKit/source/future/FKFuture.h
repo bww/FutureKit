@@ -46,6 +46,7 @@ typedef void  (^FKFutureFailureBlock)(NSError *error);
 @property (readwrite, copy)   FKFutureSuccessBlock  success;
 @property (readwrite, copy)   FKFutureFailureBlock  failure;
 @property (readonly, getter=isResolved) BOOL        resolved;
+@property (readwrite, assign) BOOL                  forwardAfterError;
 
 @end
 
@@ -55,5 +56,11 @@ static inline FKFuture * FKSuccess(FKFutureSuccessBlock block) {
 
 static inline FKFuture * FKFailure(FKFutureFailureBlock block) {
   return [FKFuture futureWithFailureBlock:block];
+}
+
+static inline FKFuture * FKFailureForward(FKFutureFailureBlock block) {
+  FKFuture *future = [FKFuture futureWithFailureBlock:block];
+  future.forwardAfterError = TRUE;
+  return future;
 }
 
