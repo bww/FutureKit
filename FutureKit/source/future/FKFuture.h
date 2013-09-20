@@ -38,6 +38,8 @@ typedef void  (^FKFutureFailureBlock)(NSError *error);
 
 -(FKFuture *)resolve;
 -(FKFuture *)resolve:(id)object;
+-(FKFuture *)resolveAfterDelay:(NSTimeInterval)interval;
+-(FKFuture *)resolveAfterDelay:(NSTimeInterval)interval object:(id)object;
 
 -(FKFuture *)error;
 -(FKFuture *)error:(NSError *)error;

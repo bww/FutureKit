@@ -78,6 +78,13 @@
 }
 
 /**
+ * A method to allow this future to be resolved by invoking a timer
+ */
+-(void)timer:(NSTimer *)timer {
+  [self resolve:timer.userInfo];
+}
+
+/**
  * Resolve this future. This method should be invoked when the long-running operation
  * represented by this future has completed successfully.
  * 
@@ -101,6 +108,23 @@
  */
 -(FKFuture *)resolve:(id)object {
   [[NSRunLoop currentRunLoop] performSelector:@selector(__resolve:) target:self argument:object order:NSUIntegerMax modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+  return self;
+}
+
+/**
+ * Resolve this future after the specified delay.
+ */
+-(FKFuture *)resolveAfterDelay:(NSTimeInterval)interval {
+  [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(timer:) userInfo:nil repeats:FALSE];
+  return self;
+}
+
+/**
+ * Create a future which resolves itself after the specified delay. The future is resolved
+ * with the provided object.
+ */
+-(FKFuture *)resolveAfterDelay:(NSTimeInterval)interval object:(id)object {
+  [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(timer:) userInfo:object repeats:FALSE];
   return self;
 }
 
