@@ -236,6 +236,7 @@
 		D39D239117822A2300213D63 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Brian William Wolter";
 			};
