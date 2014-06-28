@@ -228,7 +228,7 @@
 			name = FutureKitTests;
 			productName = FutureKitTests;
 			productReference = D39D23AE17822A2400213D63 /* FutureKitTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -236,7 +236,7 @@
 		D39D239117822A2300213D63 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Brian William Wolter";
 			};
